@@ -1,0 +1,139 @@
+[33mcommit dd21a886d82b00b415fdfe9dcc901fdfbc8ca828[m
+Author: sergey <sergeyman78@gmail.com>
+Date:   Fri Aug 25 23:19:36 2017 +0300
+
+    Sorting Searching
+
+[33mcommit 25116b6210ecf247095900ca6e6d46d460d429a0[m
+Author: sergey <sergeyman78@gmail.com>
+Date:   Fri Aug 25 23:03:46 2017 +0300
+
+    Initial  commit. (Project structure)
+
+[33mcommit b225d8ff1e5bd5855270612767a45578a438efaf[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Tue Jun 6 08:35:26 2017 +0300
+
+    changed edit/add user
+
+[33mcommit 124e6661c7a170e5346a05fd190f2f8bedbffb4f[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Tue Jun 6 01:10:19 2017 +0300
+
+    fixed edit user
+
+[33mcommit 0f5f4ac5007c1a23f980e5b42a759138b361a81d[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Mon Jun 5 18:35:53 2017 +0300
+
+    added space between "Search" and "Show all" buttons
+
+[33mcommit 744347ffddcae1176bc9e9074effa2bedd7d6d7d[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Mon Jun 5 18:04:55 2017 +0300
+
+    manage users: added edit, delete, back, logout; added cancel in registration
+
+[33mcommit 9a31150c97b8ebaf902f7a092b92dbbfa8732784[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun Jun 4 19:54:09 2017 +0300
+
+    added manage users: view all, delete
+
+[33mcommit 550355b531618e5216495f68e418fe34c49d7436[m
+Merge: 4f46015 d5049de
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun Jun 4 17:50:16 2017 +0300
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 4f46015f3c1803b648a1f93758c66bb4b9d9aefc[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun Jun 4 17:46:19 2017 +0300
+
+    User validation refactoring
+
+[33mcommit d5049de44533a096a887658ea5dc07950fcac788[m
+Author: ViktoriiaSilenko <victory.silenko@gmail.com>
+Date:   Fri Jun 2 19:38:46 2017 +0300
+
+    Delete README.md
+
+[33mcommit 9fd397e7ca5fb377716f909c29852e86f7c4fd15[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Mon May 29 00:37:42 2017 +0300
+
+    added email with validation in registration page
+
+[33mcommit bb3999dfaf51762973a0864d06d65eb1f50f4d2d[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sat May 27 23:51:50 2017 +0300
+
+    applied sitemesh 3
+
+[33mcommit 8c4f55350c6cd0e55dea7bd782bc49bfd4674e5f[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Tue May 23 00:07:09 2017 +0300
+
+    added default values for priceFrom and priceTo
+
+[33mcommit ddd451e5309ef6b42d46d34dce7a00e79e09823a[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Mon May 22 23:53:30 2017 +0300
+
+    added default values for rooms number
+
+[33mcommit 101dde9cc11122bf7953081a0114dd6fdcee88e9[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun May 21 22:49:23 2017 +0300
+
+    added "Show All" button, changed UI
+
+[33mcommit 8b798bb53472aa467c8162c48dd727bda0d67b5c[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun May 21 21:07:38 2017 +0300
+
+    refactoring
+
+[33mcommit 87730739474644403962fa9ae58f48ac30897372[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun May 21 20:43:55 2017 +0300
+
+    added photos of homes, fixed controller
+
+[33mcommit ba7d113d1693b3bb3ea6d80e40399e49d8804c6f[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun May 14 22:49:41 2017 +0300
+
+    changed title on main page
+
+[33mcommit edfc0b92b5790d2aad4bf653c08dc5c102de72e9[m
+Merge: d103c3a 1156659
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun May 14 22:43:08 2017 +0300
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit d103c3a0d9729b7158ecd52194e70282b630eaee[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun May 14 22:42:11 2017 +0300
+
+    changed main page: added list of real estate objects and filtering
+
+[33mcommit 115665974d1c62554b247f079364ac361abe6cc2[m
+Author: ViktoriiaSilenko <victory.silenko@gmail.com>
+Date:   Wed May 3 07:46:24 2017 +0300
+
+    Create README.md
+
+[33mcommit 34ed3ac6309a453d7041c8548cca8d9f365f5d97[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sun Apr 23 21:00:45 2017 +0300
+
+    changed login page
+
+[33mcommit e85d64c567a8e37178580f007d4bd493362907fa[m
+Author: Viktoria Silenko <victory.silenko@gmail.com>
+Date:   Sat Apr 22 23:32:16 2017 +0300
+
+    Registration, autorization, project structure, entities, database
