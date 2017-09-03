@@ -8,12 +8,23 @@
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/main" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')"/>
-        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+<!--        <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_OWNER')"/>
+        <intercept-url pattern="/main" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_OWNER')"/>
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>-->
 
-        <form-login login-page="/login" default-target-url="/main" authentication-failure-url="/login?error"
-                    username-parameter="username" password-parameter="password"/>
+       <intercept-url pattern="/" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_CLIENT', 'ROLE_OWNER')" />
+        <intercept-url pattern="/main" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_GUEST', 'ROLE_CLIENT', 'ROLE_OWNER')" />
+        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"  />
+
+        <intercept-url pattern="/manageEstates" access="hasAnyRole('ROLE_ADMIN', 'ROLE_OWNER')" />
+        <intercept-url pattern="/manageUsers" access="hasRole('ROLE_ADMIN')" />
+
+
+        <form-login login-page="/login"
+                    default-target-url="/main"
+                    authentication-failure-url="/login?error"
+                    username-parameter="username"
+                    password-parameter="password"/>
 
         <logout logout-success-url="/login?logout"/>
     </http>
@@ -24,6 +35,8 @@
         </authentication-provider>
     </authentication-manager>
 
+    <!-- No UserService (?) -->
+
     <beans:bean id="userDetailsServiceImpl"
                 class="com.realestate.realestateapp.service.UserDetailsServiceImpl"></beans:bean>
 
@@ -31,4 +44,5 @@
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>
     </beans:bean>
+
 </beans:beans>
