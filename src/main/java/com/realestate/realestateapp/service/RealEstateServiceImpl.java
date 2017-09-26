@@ -39,7 +39,8 @@ public class RealEstateServiceImpl implements RealEstateService {
     }
 
     @Override
-    public void save(RealEstate realEstate) {
+    public RealEstate save(RealEstate realEstate) {
 
+        return null;
     }
 }

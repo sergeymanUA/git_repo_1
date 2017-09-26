@@ -48,7 +48,9 @@ public class FrontController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+    public String registration(@ModelAttribute("userForm") User userForm,
+                               BindingResult bindingResult,
+                               Model model) {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -82,14 +84,14 @@ public class FrontController {
     }
 
     @RequestMapping("/removeUser/{id}")
-    public String removeUser(@PathVariable("id") int id){
+    public String removeUser(@PathVariable("id") int id) {
         this.realEstateService.deleteById(new Long(id));
 
         return "redirect:/manageUsers";
     }
 
     @RequestMapping("/editUser/{id}")
-    public String editUser(@PathVariable("id") int id, ModelMap model){
+    public String editUser(@PathVariable("id") int id, ModelMap model) {
         model.addAttribute("user", this.userService.findById(new Long(id)));
         model.addAttribute("listUsers", this.userService.findAll());
 
@@ -97,20 +99,20 @@ public class FrontController {
     }
 
     @RequestMapping(value = "/users/add", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute("user") User user, @RequestParam("userId") int userId,
-                          BindingResult bindingResult){
+    public String addUser(@ModelAttribute("user") User user,
+                          @RequestParam("userId") int userId,
+                          BindingResult bindingResult) {
         if (!new Long(-1).equals(new Long(userId))) {
             user.setId(new Long(userId));
             this.userService.save(user);
-        }
-        else {
+        } else {
             this.userService.save(user);
         }
 
         return "redirect:/manageUsers";
     }
 
-    //* *************** Real Estates block *************************
+    //* *************** Real Estates block START *************************
     @RequestMapping(value = "/manageEstates", method = RequestMethod.GET)
     public String manageEstates(Model model) {
         model.addAttribute("realEstate", new RealEstate());
@@ -119,15 +121,26 @@ public class FrontController {
         return "manageEstates";
     }
 
+    @RequestMapping(value = "/viewEstates/{nRooms}", method = RequestMethod.GET)
+    public String viewEstates(Model model,
+                              @PathVariable("nRooms") Byte nRooms) {
+        model.addAttribute("realEstate", new RealEstate());
+
+        //model.addAttribute("listEstates", this.realEstateService.findAll());
+        model.addAttribute("listEstates", this.realEstateService.findByNRooms(nRooms));
+
+        return "manageEstates";
+    }
+
     @RequestMapping("/removeEstate/{id}")
-    public String removeEstate(@PathVariable("id") int id){
+    public String removeEstate(@PathVariable("id") int id) {
         this.realEstateService.deleteById(new Long(id));
 
         return "redirect:/manageEstates";
     }
 
     @RequestMapping("/editEstate/{id}")
-    public String editEstate(@PathVariable("id") int id, ModelMap model){
+    public String editEstate(@PathVariable("id") int id, ModelMap model) {
         model.addAttribute("realEstate", this.realEstateService.findById(new Long(id)));
         model.addAttribute("listEstates", this.realEstateService.findAll());
 
@@ -137,18 +150,17 @@ public class FrontController {
     @RequestMapping(value = "/realEstate/add", method = RequestMethod.POST)
     public String addEstate(@ModelAttribute("realEstate") RealEstate realEstate,
                             @RequestParam("estateId") int estateId,
-                          BindingResult bindingResult) {
+                            BindingResult bindingResult) {
         if (!new Long(-1).equals(new Long(estateId))) {
             realEstate.setId(new Long(estateId));
             this.realEstateService.save(realEstate);
-        }
-        else {
+        } else {
             this.realEstateService.save(realEstate);
         }
 
         return "redirect:/manageEstates";
     }
-    //* *************** Real Estates block *************************
+    //* *************** Real Estates block END *************************
 
     @RequestMapping(value = {"/", "/main"}, method = RequestMethod.GET)
     public String main(Model model) {
@@ -158,7 +170,8 @@ public class FrontController {
 
     @RequestMapping(value = "/main", method = RequestMethod.POST)
     public String main(@ModelAttribute("userForm") SearchCriteria searchCriteria,
-                       BindingResult bindingResult, Model model) {
+                       BindingResult bindingResult,
+                       Model model) {
 
         List<RealEstate> allRealEstates = this.realEstateService.findAll();
         List<RealEstate> filteredRealEstates = new ArrayList<>();
@@ -184,28 +197,28 @@ public class FrontController {
             ex.printStackTrace();
         }
 
-        for(RealEstate realEstate: allRealEstates) {
+        for (RealEstate realEstate : allRealEstates) {
 
             boolean conditionForAdding = true;
 
-            if((searchedRoomNumber == null) && (searchedPriceFrom == null) && (searchedPriceTo == null)) {
+            if ((searchedRoomNumber == null) && (searchedPriceFrom == null) && (searchedPriceTo == null)) {
                 filteredRealEstates.addAll(allRealEstates);
                 break;
             }
 
-            if(searchedRoomNumber != null) {
+            if (searchedRoomNumber != null) {
                 conditionForAdding = conditionForAdding && realEstate.getNrooms().equals(searchedRoomNumber);
             }
 
-            if(searchedPriceFrom != null) {
+            if (searchedPriceFrom != null) {
                 conditionForAdding = conditionForAdding && (realEstate.getInitPrice() >= searchedPriceFrom);
             }
 
-            if(searchedPriceTo != null) {
+            if (searchedPriceTo != null) {
                 conditionForAdding = conditionForAdding && (realEstate.getInitPrice() <= searchedPriceTo);
             }
 
-            if(conditionForAdding) {
+            if (conditionForAdding) {
                 filteredRealEstates.add(realEstate);
             }
         }
@@ -219,6 +232,8 @@ public class FrontController {
         return "admin";
     }
 
+
+
     //* *************************************Datatable*******************************
     //http://javahonk.com/spring-mvc-pagination-datatables/
     @RequestMapping(value = "/helloWorld.web", method =
@@ -231,12 +246,13 @@ public class FrontController {
     }
 
     @RequestMapping(value = "/springPaginationDataTables.web", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody String springPaginationDataTables(HttpServletRequest  request) throws IOException {
+    public @ResponseBody
+    String springPaginationDataTables(HttpServletRequest request) throws IOException {
 
         //Fetch the page number from client
         Integer pageNumber = 0;
         if (null != request.getParameter("iDisplayStart"))
-            pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart"))/10)+1;
+            pageNumber = (Integer.valueOf(request.getParameter("iDisplayStart")) / 10) + 1;
 
         //Fetch search parameter
         String searchParameter = request.getParameter("sSearch");
@@ -252,14 +268,14 @@ public class FrontController {
         //the same list to show data randomly
         if (pageNumber == 1) {
             Collections.shuffle(personsList);
-        }else if (pageNumber == 2) {
+        } else if (pageNumber == 2) {
             Collections.shuffle(personsList);
-        }else {
+        } else {
             Collections.shuffle(personsList);
         }
 
         //Search functionality: Returns filtered list based on search parameter
-        personsList = getListBasedOnSearchParameter(searchParameter,personsList);
+        personsList = getListBasedOnSearchParameter(searchParameter, personsList);
 
 
         PersonJsonObject personJsonObject = new PersonJsonObject();
@@ -275,15 +291,15 @@ public class FrontController {
         return json2;
     }
 
-    private List<Person> getListBasedOnSearchParameter(String searchParameter,List<Person> personsList) {
+    private List<Person> getListBasedOnSearchParameter(String searchParameter, List<Person> personsList) {
 
         if (null != searchParameter && !searchParameter.equals("")) {
             List<Person> personsListForSearch = new ArrayList<Person>();
             searchParameter = searchParameter.toUpperCase();
             for (Person person : personsList) {
-                if (person.getName().toUpperCase().indexOf(searchParameter)!= -1 || person.getOffice().toUpperCase().indexOf(searchParameter)!= -1
-                        || person.getPhone().toUpperCase().indexOf(searchParameter)!= -1 || person.getPosition().toUpperCase().indexOf(searchParameter)!= -1
-                        || person.getSalary().toUpperCase().indexOf(searchParameter)!= -1 || person.getStart_date().toUpperCase().indexOf(searchParameter)!= -1) {
+                if (person.getName().toUpperCase().indexOf(searchParameter) != -1 || person.getOffice().toUpperCase().indexOf(searchParameter) != -1
+                        || person.getPhone().toUpperCase().indexOf(searchParameter) != -1 || person.getPosition().toUpperCase().indexOf(searchParameter) != -1
+                        || person.getSalary().toUpperCase().indexOf(searchParameter) != -1 || person.getStart_date().toUpperCase().indexOf(searchParameter) != -1) {
                     personsListForSearch.add(person);
                 }
 
@@ -344,7 +360,7 @@ public class FrontController {
 
         }
 
-        for (int i = 0; i < pageDisplayLength-5; i++) {
+        for (int i = 0; i < pageDisplayLength - 5; i++) {
             Person person2 = new Person();
             person2.setName("Zuke Torres");
             person2.setPosition("System Architect");

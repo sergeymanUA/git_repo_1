@@ -21,6 +21,7 @@ public class RealEstate {
     @Column(name = "nrooms", unique = false, nullable = false)
     private Byte nrooms;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "dateIn", unique = false, nullable = false)
     private Date dateIn;
 
@@ -39,6 +40,21 @@ public class RealEstate {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+
+    public RealEstate() {}
+
+    public RealEstate(Long id, String type, Double area, Byte nrooms, Date dateIn, Double initPrice, String userDescription, String photoName, String fullAddress, User owner) {
+        this.id = id;
+        this.type = type;
+        this.area = area;
+        this.nrooms = nrooms;
+        this.dateIn = dateIn;
+        this.initPrice = initPrice;
+        this.userDescription = userDescription;
+        this.photoName = photoName;
+        this.fullAddress = fullAddress;
+        this.owner = owner;
+    }
 
     public String getType() {
         return type;

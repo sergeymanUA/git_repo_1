@@ -16,7 +16,7 @@ public interface RealEstateService {
 
     void deleteById(Long id);
 
-    void save(RealEstate realEstate);
+    RealEstate save(RealEstate realEstate);
 
 
 }
